@@ -1,0 +1,19 @@
+{
+  "name": "resource",
+  "version": "0.0.1",
+  "description": "api resource manager for frontend by JavaScript",
+  "license": "MIT",
+  "author": "coinxu",
+  "repository": "https://github.com/CoinXu/resource",
+  "main": "./dist",
+  "typings": "./@type/index.d.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc"
+  },
+  "devDependencies": {
+    "webpack": "^3.0.0",
+    "typescript": "^2.4.1",
+    "awesome-typescript-loader": "^3.2.1",
+    "source-map-loader": "^0.2.1"
+  }
+}

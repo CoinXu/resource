@@ -1,0 +1,6 @@
+.idea
+.git
+*.log
+*.map
+node_modules
+src
