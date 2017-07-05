@@ -27,7 +27,7 @@ export interface ResourceConstructor {
   post<T>(uri: string, params: any, data: any, options?: any): Resource<T>
   put<T>(uri: string, params: any, data: any, options?: any): Resource<T>
   del<T>(uri: string, params: any, data: any, options?: any): Resource<T>
-  setServer<T>(server: ResourceServer): ResourceServer
+  setServer(server: ResourceServer): ResourceServer
 }
 
 declare const Resource: ResourceConstructor
