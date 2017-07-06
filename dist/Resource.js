@@ -200,7 +200,7 @@ var Resource = (function () {
      * @param server
      */
     Resource.setServer = function (server) {
-        if (tools_1.isFunction(server)) {
+        if (!tools_1.isFunction(server)) {
             throw new TypeError('resource server must be a function');
         }
         resource_server = server;

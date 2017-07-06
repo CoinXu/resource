@@ -216,7 +216,7 @@ class Resource<T> {
    * @param server
    */
   static setServer (server: ResourceServer): ResourceServer {
-    if (isFunction(server)) {
+    if (!isFunction(server)) {
       throw new TypeError('resource server must be a function')
     }
     resource_server = server
