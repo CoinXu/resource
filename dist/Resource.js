@@ -155,11 +155,12 @@ var Resource = (function () {
      * 发送get请求快捷方式
      * @param uri
      * @param params
+     * @param data
      * @param options
      * @return {Resource}
      */
-    Resource.get = function (uri, params, options) {
-        return new Resource(uri).get(params, options);
+    Resource.get = function (uri, params, data, options) {
+        return new Resource(uri).get(params, data, options);
     };
     /**
      * 发送post请求快捷方式
@@ -198,11 +199,12 @@ var Resource = (function () {
      * 重新注册发送请求函数
      * @param server
      */
-    Resource.server = function (server) {
+    Resource.setServer = function (server) {
         if (tools_1.isFunction(server)) {
             throw new TypeError('resource server must be a function');
         }
         resource_server = server;
+        return server;
     };
     return Resource;
 }());

@@ -18,6 +18,7 @@ async function main () {
   // method
   // ==================
 
+
   let result: Type
   result = await resource.get(params, data, option).json()
   result = await resource.post(params, data, option).json()

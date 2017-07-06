@@ -24,18 +24,10 @@ function replace(uri, params) {
     return r;
 }
 exports.replace = replace;
-function isObject(v) {
-    return ObjectProp.toString.call(v) === '[object Object]';
-}
-exports.isObject = isObject;
 function isFunction(v) {
     return ObjectProp.toString.call(v) === '[object Function]';
 }
 exports.isFunction = isFunction;
-function isArray(v) {
-    return Array.isArray(v);
-}
-exports.isArray = isArray;
 function toString(v) {
     return '' + v;
 }
