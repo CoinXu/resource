@@ -1,10 +1,10 @@
 // Definitions by: Coinxu <https://github.com/CoinXu>
 // TypeScript Version: 2.4
 
-export = Resource
-export as namespace Resource
+export = resource
+export as namespace resource
 
-declare namespace Resource {
+declare namespace resource {
 
   interface ResourceServer {
     (input: RequestInfo, init?: RequestInit): Promise<Response>
