@@ -110,7 +110,7 @@ class Resource<T> {
    */
   arrayBuffer (): Promise<ArrayBuffer> {
     if (!this.promise)
-      throw new Error('Need send a request before invoke Response.json')
+      throw new Error('Need send a request before invoke Response.arrayBuffer()')
     return this.promise.then(resp => resp.arrayBuffer())
   }
 
@@ -120,7 +120,7 @@ class Resource<T> {
    */
   blob (): Promise<Blob> {
     if (!this.promise)
-      throw new Error('Need send a request before invoke Response.json')
+      throw new Error('Need send a request before invoke Response.blob()')
     return this.promise.then(resp => resp.blob())
   }
 
@@ -130,7 +130,7 @@ class Resource<T> {
    */
   json (): Promise<T> {
     if (!this.promise)
-      throw new Error('Need send a request before invoke Response.json')
+      throw new Error('Need send a request before invoke Response.json()')
     return this.promise.then((resp: Response) => resp.json())
   }
 
@@ -140,7 +140,7 @@ class Resource<T> {
    */
   text (): Promise<string> {
     if (!this.promise)
-      throw new Error('Need send a request before invoke Response.json')
+      throw new Error('Need send a request before invoke Response.text()')
     return this.promise.then(resp => resp.text())
   }
 
@@ -150,7 +150,7 @@ class Resource<T> {
    */
   formData (): Promise<FormData> {
     if (!this.promise)
-      throw new Error('Need send a request before invoke Response.json')
+      throw new Error('Need send a request before invoke Response.formData()')
     return this.promise.then(resp => resp.formData())
   }
 
