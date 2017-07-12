@@ -104,7 +104,7 @@ var Resource = (function () {
      */
     Resource.prototype.arrayBuffer = function () {
         if (!this.promise)
-            throw new Error('Need send a request before invoke Response.json');
+            throw new Error('Need send a request before invoke Response.arrayBuffer()');
         return this.promise.then(function (resp) { return resp.arrayBuffer(); });
     };
     /**
@@ -113,7 +113,7 @@ var Resource = (function () {
      */
     Resource.prototype.blob = function () {
         if (!this.promise)
-            throw new Error('Need send a request before invoke Response.json');
+            throw new Error('Need send a request before invoke Response.blob()');
         return this.promise.then(function (resp) { return resp.blob(); });
     };
     /**
@@ -122,7 +122,7 @@ var Resource = (function () {
      */
     Resource.prototype.json = function () {
         if (!this.promise)
-            throw new Error('Need send a request before invoke Response.json');
+            throw new Error('Need send a request before invoke Response.json()');
         return this.promise.then(function (resp) { return resp.json(); });
     };
     /**
@@ -131,7 +131,7 @@ var Resource = (function () {
      */
     Resource.prototype.text = function () {
         if (!this.promise)
-            throw new Error('Need send a request before invoke Response.json');
+            throw new Error('Need send a request before invoke Response.text()');
         return this.promise.then(function (resp) { return resp.text(); });
     };
     /**
@@ -140,7 +140,7 @@ var Resource = (function () {
      */
     Resource.prototype.formData = function () {
         if (!this.promise)
-            throw new Error('Need send a request before invoke Response.json');
+            throw new Error('Need send a request before invoke Response.formData()');
         return this.promise.then(function (resp) { return resp.formData(); });
     };
     /**
