@@ -111,7 +111,15 @@ class Resource<T> {
   arrayBuffer (): Promise<ArrayBuffer> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.arrayBuffer()')
-    return this.promise.then(resp => resp.arrayBuffer())
+    return this.promise.then(resp => {
+      let ret: Promise<ArrayBuffer>
+      try {
+        ret = resp.arrayBuffer()
+      } catch (e) {
+        ret = Promise.resolve<ArrayBuffer>(new ArrayBuffer(0))
+      }
+      return ret
+    })
   }
 
   /**
@@ -121,7 +129,15 @@ class Resource<T> {
   blob (): Promise<Blob> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.blob()')
-    return this.promise.then(resp => resp.blob())
+    return this.promise.then(resp => {
+      let ret: Promise<Blob>
+      try {
+        ret = resp.blob()
+      } catch (e) {
+        ret = Promise.resolve(new Blob())
+      }
+      return ret
+    })
   }
 
   /**
@@ -131,7 +147,15 @@ class Resource<T> {
   json (): Promise<T> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.json()')
-    return this.promise.then((resp: Response) => resp.json())
+    return this.promise.then((resp: Response) => {
+      let ret: Promise<any>
+      try {
+        ret = resp.json()
+      } catch (e) {
+        ret = Promise.resolve({})
+      }
+      return ret
+    })
   }
 
   /**
@@ -141,7 +165,15 @@ class Resource<T> {
   text (): Promise<string> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.text()')
-    return this.promise.then(resp => resp.text())
+    return this.promise.then(resp => {
+      let ret: Promise<string>
+      try {
+        ret = resp.text()
+      } catch (e) {
+        ret = Promise.resolve('')
+      }
+      return ret
+    })
   }
 
   /**
@@ -151,7 +183,15 @@ class Resource<T> {
   formData (): Promise<FormData> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.formData()')
-    return this.promise.then(resp => resp.formData())
+    return this.promise.then(resp => {
+      let ret: Promise<FormData>
+      try {
+        ret = resp.formData()
+      } catch (e) {
+        ret = Promise.resolve(new FormData())
+      }
+      return ret
+    })
   }
 
   /**
