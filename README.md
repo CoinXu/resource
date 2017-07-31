@@ -1,6 +1,6 @@
 # 目的
 1. 为接口提供统一管理能力
-2. 统一编接口相关api
+2. 统一接口相关api
 
 # 特性
 1. url参数解析
@@ -78,4 +78,12 @@ Resource.setServer(function(input, opt){
 })
 ```
 
+在服务端可以使用`node-fetch`来代替
+```JavaScript
+import fetch from 'node-fetch'
+import {Resource} from 'resource'
+Resource.setServer(function(input, init){
+    return fetch(input, init)
+})
+```
 
