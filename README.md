@@ -12,7 +12,7 @@
 3. 返回结果为Promise
 
 # 示例
-```JavaScript
+```js
 import { Resource } from 'resource'
 // create instance
 const $resources = {
@@ -62,7 +62,7 @@ function server(input: RequestInfo, init?: RequestInit): Promise<Response>
   + init为请求配置，详细见 [https://developer.mozilla.org/zh-CN/docs/Web/API/Request/Request](https://developer.mozilla.org/zh-CN/docs/Web/API/Request/Request)
 2. 返回值为一个Promise，Promise结果必须为[Response](https://developer.mozilla.org/zh-CN/docs/Web/API/Response)
 
-```JavaScript
+```js
 import {Resource} from 'resource'
 Resource.setServer(function(input, opt){
     const {method, body} = opt
@@ -83,7 +83,7 @@ Resource.setServer(function(input, opt){
 ```
 
 在服务端可以使用`node-fetch`来代替
-```JavaScript
+```js
 import fetch from 'node-fetch'
 import {Resource} from 'resource'
 Resource.setServer(function(input, init){
