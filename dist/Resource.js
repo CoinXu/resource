@@ -27,6 +27,14 @@ var resource_server = function (input, init) {
     return window.fetch(input, init);
 };
 /**
+ * @param {Response} res
+ * @return {Boolean}
+ */
+function isOk(res) {
+    var ok = res.ok, status = res.status;
+    return ok || status === 200 || status === 204 || status === 304;
+}
+/**
  * @class Resource
  * @description 定义一个接口所有操作，并统一返回规范
  * @example
@@ -106,14 +114,7 @@ var Resource = (function () {
         if (!this.promise)
             throw new Error('Need send a request before invoke Response.arrayBuffer()');
         return this.promise.then(function (resp) {
-            var ret;
-            try {
-                ret = resp.arrayBuffer();
-            }
-            catch (e) {
-                ret = Promise.resolve(new ArrayBuffer(0));
-            }
-            return ret;
+            return isOk(resp) ? resp.arrayBuffer() : Promise.resolve(new ArrayBuffer(0));
         });
     };
     /**
@@ -124,14 +125,7 @@ var Resource = (function () {
         if (!this.promise)
             throw new Error('Need send a request before invoke Response.blob()');
         return this.promise.then(function (resp) {
-            var ret;
-            try {
-                ret = resp.blob();
-            }
-            catch (e) {
-                ret = Promise.resolve(new Blob());
-            }
-            return ret;
+            return isOk(resp) ? resp.blob() : Promise.resolve(new Blob());
         });
     };
     /**
@@ -142,14 +136,7 @@ var Resource = (function () {
         if (!this.promise)
             throw new Error('Need send a request before invoke Response.json()');
         return this.promise.then(function (resp) {
-            var ret;
-            try {
-                ret = resp.json();
-            }
-            catch (e) {
-                ret = Promise.resolve({});
-            }
-            return ret;
+            return isOk(resp) ? resp.json() : Promise.resolve({});
         });
     };
     /**
@@ -160,14 +147,7 @@ var Resource = (function () {
         if (!this.promise)
             throw new Error('Need send a request before invoke Response.text()');
         return this.promise.then(function (resp) {
-            var ret;
-            try {
-                ret = resp.text();
-            }
-            catch (e) {
-                ret = Promise.resolve('');
-            }
-            return ret;
+            return isOk(resp) ? resp.text() : Promise.resolve('');
         });
     };
     /**
@@ -178,14 +158,7 @@ var Resource = (function () {
         if (!this.promise)
             throw new Error('Need send a request before invoke Response.formData()');
         return this.promise.then(function (resp) {
-            var ret;
-            try {
-                ret = resp.formData();
-            }
-            catch (e) {
-                ret = Promise.resolve(new FormData());
-            }
-            return ret;
+            return isOk(resp) ? resp.formData() : Promise.resolve(new FormData());
         });
     };
     /**
