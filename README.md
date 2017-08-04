@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/CoinXu/resource.svg?branch=master)](https://travis-ci.org/CoinXu/resource)
+[![npm version](https://badge.fury.io/js/sugo-resource.svg)](https://badge.fury.io/js/sugo-resource)
+
+
 # 目的
 1. 为接口提供统一管理能力
 2. 统一接口相关api

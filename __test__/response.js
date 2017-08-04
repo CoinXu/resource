@@ -28,7 +28,8 @@ describe('Response Tests', function () {
     get: Resource.create(host),
     post: Resource.create(host),
     put: Resource.create(host),
-    del: Resource.create(host)
+    del: Resource.create(host),
+    param: Resource.create(`${host}/:user`)
   }
 
   it('Server start at => ' + host, function (done) {
@@ -61,6 +62,14 @@ describe('Response Tests', function () {
 
   it('Send a del request and return json', function (done) {
     $resources.del.del({}, {}).json().then(function (json) {
+      console.log('del.res => %s', JSON.stringify(json))
+      ok(isJson(json))
+      done()
+    })
+  })
+
+  it('Send a get request with param and return json', function (done) {
+    $resources.param.get({ user: 'user-name' }, {}).json().then(function (json) {
       console.log('del.res => %s', JSON.stringify(json))
       ok(isJson(json))
       done()
