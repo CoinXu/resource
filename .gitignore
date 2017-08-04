@@ -3,3 +3,4 @@
 *.log
 *.map
 node_modules
+yarn.log
