@@ -27,7 +27,8 @@ let resource_server: ResourceServer = function (input: RequestInfo, init?: Reque
  * @param {Response} res
  * @return {Boolean}
  */
-function isOk (res: Response) {
+function isOk (res: Response | null) {
+  if (!res) return false
   const {ok, status} = res
   return ok || status === 200 || status === 204 || status === 304
 }

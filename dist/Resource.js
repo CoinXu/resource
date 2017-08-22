@@ -31,6 +31,8 @@ var resource_server = function (input, init) {
  * @return {Boolean}
  */
 function isOk(res) {
+    if (!res)
+        return false;
     var ok = res.ok, status = res.status;
     return ok || status === 200 || status === 204 || status === 304;
 }
