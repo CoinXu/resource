@@ -2,7 +2,7 @@
  * @file Class Resource
  */
 
-import {replace, isFunction} from './tools'
+import { replace, isFunction } from './tools'
 
 interface ResourceServer {
   (input: RequestInfo, init?: RequestInit): Promise<Response>
@@ -27,10 +27,11 @@ let resource_server: ResourceServer = function (input: RequestInfo, init?: Reque
  * @param {Response} res
  * @return {Boolean}
  */
-function isOk (res: Response | null) {
+function isOk(res: Response | null) {
   if (!res) return false
-  const {ok, status} = res
-  return ok || status === 200 || status === 204 || status === 304
+  return res.status < 500
+  // const { ok, status } = res
+  // return ok || status === 200 || status === 204 || status === 304
 }
 
 /**
@@ -48,7 +49,7 @@ class Resource<T> {
   private uri: string
   private server: ResourceServer
 
-  constructor (uri: string) {
+  constructor(uri: string) {
     this.uri = uri
     this.server = resource_server
   }
@@ -60,7 +61,7 @@ class Resource<T> {
    * @param option
    * @return {Resource}
    */
-  get (param: any, data: any, option = {}): Resource<T> {
+  get(param: any, data: any, option = {}): Resource<T> {
     return this.send(param, 'get', data, option)
   }
 
@@ -71,7 +72,7 @@ class Resource<T> {
    * @param option
    * @return {Resource}
    */
-  post (param: any, data: any, option = {}): Resource<T> {
+  post(param: any, data: any, option = {}): Resource<T> {
     return this.send(param, 'post', data, option)
   }
 
@@ -82,7 +83,7 @@ class Resource<T> {
    * @param option
    * @return {Resource}
    */
-  put (param: any, data: any, option = {}): Resource<T> {
+  put(param: any, data: any, option = {}): Resource<T> {
     return this.send(param, 'put', data, option)
   }
 
@@ -93,7 +94,7 @@ class Resource<T> {
    * @param option
    * @return {Resource}
    */
-  del (param: any, data: any, option = {}): Resource<T> {
+  del(param: any, data: any, option = {}): Resource<T> {
     return this.send(param, 'delete', data, option)
   }
 
@@ -105,7 +106,7 @@ class Resource<T> {
    * @param other
    * @return {Resource}
    */
-  send (params: any, method: string, data: any, other = {}): Resource<T> {
+  send(params: any, method: string, data: any, other = {}): Resource<T> {
     this.promise = this.server(replace(this.uri, params || {}), {
       body: data,
       method,
@@ -118,7 +119,7 @@ class Resource<T> {
    * 返回ArrayBuffer结果
    * @return {Promise<ArrayBuffer>}
    */
-  arrayBuffer (): Promise<ArrayBuffer> {
+  arrayBuffer(): Promise<ArrayBuffer> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.arrayBuffer()')
     return this.promise.then(resp => {
@@ -130,7 +131,7 @@ class Resource<T> {
    * 返回Blob结果
    * @return {Promise<Blob>}
    */
-  blob (): Promise<Blob> {
+  blob(): Promise<Blob> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.blob()')
     return this.promise.then(resp => {
@@ -142,7 +143,7 @@ class Resource<T> {
    * 返回JSON结果
    * @return {Promise<*>}
    */
-  json (): Promise<T> {
+  json(): Promise<T> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.json()')
     return this.promise.then((resp: Response) => {
@@ -154,7 +155,7 @@ class Resource<T> {
    * 返回String结果
    * @return {Promise<String>}
    */
-  text (): Promise<string> {
+  text(): Promise<string> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.text()')
     return this.promise.then(resp => {
@@ -166,7 +167,7 @@ class Resource<T> {
    * 返回FromData
    * @return {Promise<FormData>}
    */
-  formData (): Promise<FormData> {
+  formData(): Promise<FormData> {
     if (!this.promise)
       throw new Error('Need send a request before invoke Response.formData()')
     return this.promise.then(resp => {
@@ -179,7 +180,7 @@ class Resource<T> {
    * @param uri
    * @return {Resource}
    */
-  static create<T> (uri: string): Resource<T> {
+  static create<T>(uri: string): Resource<T> {
     return new Resource<T>(uri)
   }
 
@@ -191,7 +192,7 @@ class Resource<T> {
    * @param options
    * @return {Resource}
    */
-  static get<T> (uri: string, params: any, data?: any, options ?: any): Resource<T> {
+  static get<T>(uri: string, params: any, data?: any, options?: any): Resource<T> {
     return new Resource<T>(uri).get(params, data, options)
   }
 
@@ -203,7 +204,7 @@ class Resource<T> {
    * @param options
    * @return {Resource}
    */
-  static post<T> (uri: string, params: any, data: any, options ?: any): Resource<T> {
+  static post<T>(uri: string, params: any, data: any, options?: any): Resource<T> {
     return new Resource<T>(uri).post(params, data, options)
   }
 
@@ -215,7 +216,7 @@ class Resource<T> {
    * @param options
    * @return {Resource}
    */
-  static put<T> (uri: string, params: any, data: any, options ?: any): Resource<T> {
+  static put<T>(uri: string, params: any, data: any, options?: any): Resource<T> {
     return new Resource<T>(uri).put(params, data, options)
   }
 
@@ -227,7 +228,7 @@ class Resource<T> {
    * @param options
    * @return {Resource}
    */
-  static del<T> (uri: string, params: any, data: any, options ?: any): Resource<T> {
+  static del<T>(uri: string, params: any, data: any, options?: any): Resource<T> {
     return new Resource<T>(uri).del(params, data, options)
   }
 
@@ -235,7 +236,7 @@ class Resource<T> {
    * 重新注册发送请求函数
    * @param server
    */
-  static setServer (server: ResourceServer): ResourceServer {
+  static setServer(server: ResourceServer): ResourceServer {
     if (!isFunction(server)) {
       throw new TypeError('resource server must be a function')
     }

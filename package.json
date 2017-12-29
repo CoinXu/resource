@@ -1,6 +1,6 @@
 {
   "name": "sugo-resource",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "api resource manager for frontend by JavaScript",
   "license": "MIT",
   "author": "coinxu",
