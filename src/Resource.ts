@@ -30,8 +30,6 @@ let resource_server: ResourceServer = function (input: RequestInfo, init?: Reque
 function isOk(res: Response | null) {
   if (!res) return false
   return res.status < 500
-  // const { ok, status } = res
-  // return ok || status === 200 || status === 204 || status === 304
 }
 
 /**

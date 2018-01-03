@@ -2,7 +2,7 @@
 /**
  * @file Class Resource
  */
-var __assign = (this && this.__assign) || Object.assign || function (t) {
+var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
         for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
@@ -33,10 +33,7 @@ var resource_server = function (input, init) {
 function isOk(res) {
     if (!res)
         return false;
-    return res.status < 500
-
-    // var ok = res.ok, status = res.status;
-    // return ok || status === 200 || status === 204 || status === 304;
+    return res.status < 500;
 }
 /**
  * @class Resource
@@ -48,7 +45,7 @@ function isOk(res) {
  *  console.log(result.key)
  * ```
  */
-var Resource = (function () {
+var Resource = /** @class */ (function () {
     function Resource(uri) {
         this.uri = uri;
         this.server = resource_server;
